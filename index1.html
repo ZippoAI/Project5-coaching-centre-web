@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEVA - North East Vision Academy | Shaping Tomorrow's Leaders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF8C00;
+            --primary-dark: #CC7000;
+            --secondary: #FFD700;
+            --secondary-light: #FFF8E1;
+            --accent: #FF6B35;
+            --gradient: linear-gradient(135deg, #FF8C00 0%, #FFB347 100%);
+            --gradient-yellow: linear-gradient(135deg, #FFD700 0%, #FFF176 100%);
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #FFF8F0;
+            --white: #FFFFFF;
+            --section-bg: #FFFBF5;
+            --shadow: 0 10px 30px rgba(255, 140, 0, 0.1);
+            --shadow-hover: 0 15px 40px rgba(255, 140, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(255, 140, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #FF8C00 0%, #FFA726 50%, #FFB74D 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-highlight {
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient-yellow);
+            color: var(--text-dark);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            background: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 2rem auto 0;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--section-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .about-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Courses Section */
+        .courses {
+            background: var(--white);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-top: 5px solid var(--primary);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .course-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-yellow);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--text-dark);
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .course-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-small {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Faculty Section */
+        .faculty {
+            background: var(--section-bg);
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .faculty-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
+        }
+
+        .faculty-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+            font-weight: 700;
+            border: 4px solid var(--white);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
+        }
+
+        .faculty-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .faculty-subject {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .faculty-exp {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .faculty-quote {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-left: 3px solid var(--secondary);
+            padding-left: 1rem;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--white);
+        }
+
+        .testimonial-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            border: 1px solid var(--secondary-light);
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* New Facilities Section */
+        .facilities {
+            background: var(--section-bg);
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .facility-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .facility-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .facility-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .facility-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #FF8C00 0%, #FFA726 100%);
+            color: var(--white);
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-text p {
+            color: var(--text-light);
+        }
+
+        .contact-form {
+            background: var(--section-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #FFE0B2;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .map-container {
+            margin-top: 3rem;
+            height: 400px;
+            background: linear-gradient(45deg, #FFF8E1, #FFECB3);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            border: 2px dashed var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #FF8C00 0%, #CC7000 100%);
+            color: rgba(255,255,255,0.95);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(255,140,0,0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">NEVA</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#faculty">Faculty</a></li>
+                <li><a href="#facilities">Facilities</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Shaping the <span class="hero-highlight">Future</span> of North East's Brightest Minds</h1>
+            <p>NEVA - Where vision meets excellence. Empowering students from Class 9 to competitive exams with world-class mentorship and proven results.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Enroll Now</a>
+                <a href="#courses" class="btn btn-secondary">Download Prospectus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About NEVA</h2>
+                <p>Building foundations for tomorrow's leaders through discipline, dedication, and excellence</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Turning Vision into Results</h3>
+                    <p>North East Vision Academy (NEVA) stands as a beacon of educational excellence in the North East region. Since our inception, we've been committed to nurturing young minds and guiding them toward academic success and personal growth.</p>
+                    <p>Our approach combines traditional teaching values with modern educational techniques, creating a learning environment where every student can thrive and reach their full potential.</p>
+                    <p>At NEVA, we don't just teach subjects—we build character, instill discipline, and create future leaders who will shape tomorrow.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-text">
+                            <h4>Result-Oriented Approach</h4>
+                            <p>Proven track record of 90%+ success rates</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">👨‍🏫</div>
+                        <div class="feature-text">
+                            <h4>Expert Faculty</h4>
+                            <p>Experienced mentors with 10+ years expertise</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📚</div>
+                        <div class="feature-text">
+                            <h4>Comprehensive Curriculum</h4>
+                            <p>Updated syllabus aligned with latest patterns</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-text">
+                            <h4>Personalized Guidance</h4>
+                            <p>Individual attention in small batch sizes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Courses</h2>
+                <p>Comprehensive programs designed to excel at every academic level</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon">📖</div>
+                    <h3>Class 9 & 10 Foundation</h3>
+                    <p>Strong foundational concepts for board exams with regular assessments and doubt-clearing sessions.</p>
+                    <a href="#contact" class="btn btn-primary btn-small">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">🔬</div>
+                    <h3>Class 11 & 12 Science</h3>
+                    <p>Advanced preparation for PCM/PCB streams with focus on board exams and entrance tests.</p>
+                    <a href="#contact" class="btn btn-primary btn-small">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">💼</div>
+                    <h3>Class 11 & 12 Commerce</h3>
+                    <p>Comprehensive commerce education covering accountancy, business studies, and economics.</p>
+                    <a href="#contact" class="btn btn-primary btn-small">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">🏆</div>
+                    <h3>Competitive Exam Prep</h3>
+                    <p>Specialized coaching for JEE, NEET, and other competitive examinations with proven strategies.</p>
+                    <a href="#contact" class="btn btn-primary btn-small">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">⚡</div>
+                    <h3>Crash Courses</h3>
+                    <p>Intensive revision programs designed for last-minute preparation and concept strengthening.</p>
+                    <a href="#contact" class="btn btn-primary btn-small">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">💡</div>
+                    <h3>Doubt Clearing Sessions</h3>
+                    <p>One-on-one mentoring and group doubt sessions to ensure complete conceptual clarity.</p>
+                    <a href="#contact" class="btn btn-primary btn-small">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="faculty" id="faculty">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Faculty</h2>
+                <p>Learn from the best minds dedicated to your success</p>
+            </div>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <div class="faculty-img">DS</div>
+                    <h3>Dr. Sameer Deka</h3>
+                    <p class="faculty-subject">Physics & Mathematics</p>
+                    <p class="faculty-exp">15 Years Experience | Ph.D. IIT Delhi</p>
+                    <p class="faculty-quote">"Success is the sum of small efforts repeated day in and day out."</p>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">PS</div>
+                    <h3>Prof. Priyanka Sharma</h3>
+                    <p class="faculty-subject">Chemistry</p>
+                    <p class="faculty-exp">12 Years Experience | M.Sc. Gold Medalist</p>
+                    <p class="faculty-quote">"Every student has the potential to achieve greatness with proper guidance."</p>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">RB</div>
+                    <h3>Rajesh Borah</h3>
+                    <p class="faculty-subject">Biology & Zoology</p>
+                    <p class="faculty-exp">10 Years Experience | NEET Expert</p>
+                    <p class="faculty-quote">"Understanding beats memorization every single time."</p>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">AK</div>
+                    <h3>Ankita Kashyap</h3>
+                    <p class="faculty-subject">English & Communication</p>
+                    <p class="faculty-exp">8 Years Experience | Cambridge Certified</p>
+                    <p class="faculty-quote">"Language is the key that unlocks infinite possibilities."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Facilities Section -->
+    <section class="facilities" id="facilities">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Facilities</h2>
+                <p>State-of-the-art infrastructure designed for optimal learning</p>
+            </div>
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <div class="facility-icon">🏫</div>
+                    <h3>Modern Classrooms</h3>
+                    <p>Air-conditioned classrooms with smart boards, ergonomic seating, and excellent acoustics for focused learning.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon">📚</div>
+                    <h3>Digital Library</h3>
+                    <p>Extensive collection of reference books, e-books, journals, and online resources accessible 24/7.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon">💻</div>
+                    <h3>Computer Lab</h3>
+                    <p>High-speed internet, latest software, and individual workstations for research and online learning.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon">🧪</div>
+                    <h3>Science Laboratory</h3>
+                    <p>Fully-equipped labs for Physics, Chemistry, and Biology with modern instruments and safety features.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon">☕</div>
+                    <h3>Cafeteria</h3>
+                    <p>Hygienic and nutritious food options available throughout the day in a comfortable dining space.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon">🚌</div>
+                    <h3>Transport Facility</h3>
+                    <p>Safe and reliable transportation covering major routes with GPS tracking and trained drivers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="counter" data-target="500">0</h3>
+                    <p>Students Mentored</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="90">0</h3>
+                    <p>Success Rate (%)</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="15">0</h3>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="25">0</h3>
+                    <p>Expert Faculty</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Student Success Stories</h2>
+                <p>Hear from our students who achieved their dreams</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">"NEVA transformed my approach to learning. The faculty's personalized attention helped me secure 95% in my boards and get into my dream engineering college!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">AR</div>
+                        <div class="author-info">
+                            <h4>Aryan Roy</h4>
+                            <p>JEE Advanced | AIR 542</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">"The doubt-clearing sessions and regular tests at NEVA built my confidence. I went from struggling in Chemistry to scoring 98 in my boards!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">PD</div>
+                        <div class="author-info">
+                            <h4>Priyanka Das</h4>
+                            <p>Class 12 Topper | 98% in Science</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">"The foundation program in Class 9-10 gave me the perfect base for competitive exams. NEVA's systematic approach is truly unmatched."</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">RG</div>
+                        <div class="author-info">
+                            <h4>Rohan Gupta</h4>
+                            <p>NEET | AIIMS Delhi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="container">
+        <section class="cta-section">
+            <div class="container">
+                <h2>Start Your Journey to Success Today</h2>
+                <p>Limited seats available for the upcoming academic session. Secure your spot now!</p>
+                <a href="#contact" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch to start your educational journey with NEVA</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Our Campus</h4>
+                            <p>NEVA Campus, GS Road<br>Guwahati, Assam - 781005</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Phone Number</h4>
+                            <p>+91 98765 43210<br>+91 98765 43211</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-text">
+                            <h4>Email Address</h4>
+                            <p>info@nevacademy.com<br>admissions@nevacademy.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🕒</div>
+                        <div class="info-text">
+                            <h4>Working Hours</h4>
+                            <p>Monday - Saturday: 8:00 AM - 8:00 PM<br>Sunday: 10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Interested Course</label>
+                            <select id="course" name="course" required>
+                                <option value="">Select a course</option>
+                                <option value="class9-10">Class 9 & 10 Foundation</option>
+                                <option value="class11-12-science">Class 11 & 12 Science</option>
+                                <option value="class11-12-commerce">Class 11 & 12 Commerce</option>
+                                <option value="competitive">Competitive Exam Prep</option>
+                                <option value="crash">Crash Courses</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+            <div class="map-container">
+                <div style="text-align: center;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">📍 Campus Location</h3>
+                    <p style="color: var(--text-light);">NEVA Campus, GS Road, Guwahati</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 1rem;">[Map Integration Available]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NEVA Academy</h3>
+                <p>North East Vision Academy is committed to excellence in education, shaping the future leaders of tomorrow through innovative teaching and personalized mentorship.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">📘</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">📱</a>
+                    <a href="#" class="social-icon">🎥</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#courses">Courses</a>
+                <a href="#faculty">Faculty</a>
+                <a href="#facilities">Facilities</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Courses</h3>
+                <a href="#courses">Class 9-10 Foundation</a>
+                <a href="#courses">Class 11-12 Science</a>
+                <a href="#courses">Class 11-12 Commerce</a>
+                <a href="#courses">Competitive Exams</a>
+                <a href="#courses">Crash Courses</a>
+                <a href="#courses">Doubt Clearing Sessions</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 NEVA Campus, GS Road, Guwahati</p>
+                <p>📞 +91 98765 43210</p>
+                <p>✉️ info@nevacademy.com</p>
+                <p>🕒 Mon-Sat: 8AM-8PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 North East Vision Academy. All rights reserved. | Designed with ❤️ for better education</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileToggle.querySelectorAll('span').forEach(span => {
+                span.style.transform = navLinks.classList.contains('active') ? 'rotate(45deg)' : 'none';
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target.toLocaleString();
+                }
+            });
+        };
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero section animation
+        gsap.from('.hero h1', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero p', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.cta-buttons', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+
+        // Section animations
+        document.querySelectorAll('section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Card animations
+        gsap.utils.toArray('.course-card, .faculty-card, .facility-card, .testimonial-card').forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out'
+            });
+        });
+
+        // Start counters when stats section is in view
+        const statsSection = document.querySelector('.stats');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+
+        // Form submission
+        document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your enquiry! We will contact you shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

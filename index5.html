@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Academy | Premium Coaching Centre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0f;
+            --secondary-dark: #15151e;
+            --accent-gold: #d4af37;
+            --accent-teal: #2dd4bf;
+            --light-text: #f8fafc;
+            --gray-text: #94a3b8;
+            --gray-border: #2d3748;
+            --card-bg: #1a1a24;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--light-text);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-divider {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 2rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover {
+            background: #c19b2e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-teal);
+            border: 1px solid var(--accent-teal);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(45, 212, 191, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        /* Navigation Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-link:hover:after, .nav-link.active:after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(21, 21, 30, 0.8) 100%), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwMCAxMDAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgZmlsbD0icmdiYSgyMTIsMTc1LDU1LDAuMDUpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--secondary-dark);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-features {
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Courses Section */
+        .courses {
+            background-color: var(--primary-dark);
+        }
+
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--gray-border);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-gold);
+        }
+
+        .course-img {
+            height: 200px;
+            background: linear-gradient(135deg, #2dd4bf 0%, #0e7490 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .course-content {
+            padding: 2rem;
+        }
+
+        .course-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-tag {
+            background: rgba(45, 212, 191, 0.1);
+            color: var(--accent-teal);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .course-price {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        /* Faculty Section */
+        .faculty {
+            background-color: var(--secondary-dark);
+        }
+
+        .faculty-profiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .faculty-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--gray-border);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-teal);
+        }
+
+        .faculty-img {
+            height: 300px;
+            background: linear-gradient(135deg, #d4af37 0%, #8b6914 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .faculty-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .faculty-role {
+            color: var(--accent-teal);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .faculty-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .faculty-social a {
+            color: var(--gray-text);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .faculty-social a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 10px;
+            border: 1px solid var(--gray-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary-dark);
+            border: 1px solid var(--gray-border);
+            border-radius: 4px;
+            color: var(--light-text);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--gray-border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-border);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--gray-text);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--card-bg);
+                width: 80%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                transition: var(--transition);
+                border-left: 1px solid var(--gray-border);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .course-cards, .faculty-profiles {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Nexus<span>Academy</span></a>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#courses" class="nav-link">Courses</a>
+                <a href="#faculty" class="nav-link">Faculty</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#" class="btn btn-primary">Enroll Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-subtitle">Excellence in Education</span>
+                <h1>Unlock Your Potential with Premier Coaching</h1>
+                <p>Nexus Academy provides elite coaching designed to transform students into high-achievers. Our proven methodology combines expert instruction with personalized mentorship.</p>
+                <div class="hero-btns">
+                    <a href="#courses" class="btn btn-primary">Explore Programs</a>
+                    <a href="#contact" class="btn btn-secondary">Book Consultation</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h4>98%</h4>
+                        <p>Success Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>50+</h4>
+                        <p>Expert Mentors</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>2000+</h4>
+                        <p>Students Transformed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Nexus Academy</h2>
+                <p>We are more than just a coaching center. We are a transformative learning ecosystem that cultivates excellence and builds future leaders.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <!-- Placeholder for image -->
+                    <div style="height: 400px; background: linear-gradient(135deg, #1a1a24 0%, #2d3748 100%); display: flex; align-items: center; justify-content: center; color: var(--accent-gold); font-size: 2rem;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Where Ambition Meets Opportunity</h3>
+                    <p>Founded by a team of Ivy League alumni and industry experts, Nexus Academy has been redefining coaching standards for over a decade. Our unique approach combines academic rigor with holistic development.</p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div>
+                                <h4>Personalized Learning</h4>
+                                <p>Customized study plans tailored to each student's strengths and improvement areas.</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4>Proven Methodology</h4>
+                                <p>Data-driven teaching techniques that have consistently delivered exceptional results.</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h4>Lifelong Mentorship</h4>
+                                <p>Ongoing guidance that extends beyond classroom instruction to career development.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Premier Programs</h2>
+                <p>Choose from our carefully designed courses that cater to diverse academic and career aspirations.</p>
+            </div>
+            <div class="course-cards">
+                <div class="course-card">
+                    <div class="course-img">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-tags">
+                            <span class="course-tag">STEM</span>
+                            <span class="course-tag">Advanced</span>
+                        </div>
+                        <h3>Advanced Science & Math</h3>
+                        <p>Comprehensive program covering Physics, Chemistry, Mathematics, and Biology with advanced problem-solving techniques.</p>
+                        <div class="course-price">$1,200/term</div>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-tags">
+                            <span class="course-tag">Humanities</span>
+                            <span class="course-tag">Test Prep</span>
+                        </div>
+                        <h3>Law & Humanities Mastery</h3>
+                        <p>Specialized coaching for law entrance exams, political science, economics, and critical thinking development.</p>
+                        <div class="course-price">$950/term</div>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-tags">
+                            <span class="course-tag">Technology</span>
+                            <span class="course-tag">Coding</span>
+                        </div>
+                        <h3>Computer Science & Coding</h3>
+                        <p>From fundamentals to advanced programming, algorithm design, and software development principles.</p>
+                        <div class="course-price">$1,500/term</div>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="faculty" id="faculty">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Distinguished Faculty</h2>
+                <p>Learn from industry leaders and academic experts with proven track records of student success.</p>
+            </div>
+            <div class="faculty-profiles">
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h3>Dr. Rebecca Sterling</h3>
+                        <span class="faculty-role">Physics & Advanced Mathematics</span>
+                        <p>Former MIT professor with 15+ years of teaching experience. Specializes in quantum mechanics and mathematical modeling.</p>
+                        <div class="faculty-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h3>James Chen</h3>
+                        <span class="faculty-role">Computer Science & Engineering</span>
+                        <p>Ex-Google engineer turned educator. Focuses on practical coding skills, algorithms, and software architecture.</p>
+                        <div class="faculty-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="faculty-content">
+                        <h3>Dr. Anika Sharma</h3>
+                        <span class="faculty-role">Biology & Medical Sciences</span>
+                        <p>Medical doctor and experienced NEET mentor. Simplifies complex biological concepts with real-world applications.</p>
+                        <div class="faculty-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p>Ready to begin your transformation? Contact us for a personalized consultation and program recommendation.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Our Campus</h4>
+                            <p>123 Education Boulevard<br>Knowledge District, NY 10001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone Number</h4>
+                            <p>+1 (555) 123-4567<br>Mon-Fri, 9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Address</h4>
+                            <p>admissions@nexusacademy.edu<br>support@nexusacademy.edu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">Program Interest</label>
+                            <select id="interest" class="form-control">
+                                <option value="">Select a program</option>
+                                <option value="science">Advanced Science & Math</option>
+                                <option value="law">Law & Humanities Mastery</option>
+                                <option value="cs">Computer Science & Coding</option>
+                                <option value="other">Other/Not Sure</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" rows="4" placeholder="Tell us about your goals and questions"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Nexus Academy</h4>
+                    <p>Transforming ambitions into achievements through premier coaching and mentorship since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Programs</a></li>
+                        <li><a href="#faculty">Faculty</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Advanced Science</a></li>
+                        <li><a href="#">Law & Humanities</a></li>
+                        <li><a href="#">Computer Science</a></li>
+                        <li><a href="#">Test Preparation</a></li>
+                        <li><a href="#">Career Counseling</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog & Articles</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Study Materials</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Scholarships</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Nexus Academy. All rights reserved.</p>
+                <p>Designed with excellence for transformative education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register GSAP plugins
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero animation on load
+            const heroTimeline = gsap.timeline();
+            heroTimeline
+                .from('.hero-subtitle', {duration: 1, opacity: 0, y: 30})
+                .from('h1', {duration: 1.2, opacity: 0, y: 40}, '-=0.5')
+                .from('.hero p', {duration: 1, opacity: 0, y: 30}, '-=0.7')
+                .from('.hero-btns', {duration: 1, opacity: 0, y: 30}, '-=0.5')
+                .from('.hero-stats', {duration: 1, opacity: 0, y: 30}, '-=0.5');
+            
+            // Section reveal animations
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1.2,
+                    ease: 'power2.out'
+                });
+            });
+            
+            // Card hover animations
+            const cards = document.querySelectorAll('.course-card, .faculty-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        duration: 0.3,
+                        y: -10,
+                        boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)',
+                        ease: 'power2.out'
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        duration: 0.3,
+                        y: 0,
+                        boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            // Button hover animations
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    gsap.to(button, {
+                        duration: 0.2,
+                        scale: 1.05,
+                        ease: 'power2.out'
+                    });
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    gsap.to(button, {
+                        duration: 0.2,
+                        scale: 1,
+                        ease: 'power2.out'
+                    });
+                });
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Update active nav link based on scroll position
+                updateActiveNavLink();
+            });
+            
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileToggle.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking a link
+            const navItems = document.querySelectorAll('.nav-link');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Form submission
+            const enquiryForm = document.getElementById('enquiryForm');
+            enquiryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                
+                if (name && email) {
+                    // Show success message
+                    const submitBtn = enquiryForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    
+                    submitBtn.textContent = 'Enquiry Sent!';
+                    submitBtn.style.backgroundColor = '#2dd4bf';
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.backgroundColor = '';
+                        enquiryForm.reset();
+                    }, 3000);
+                    
+                    // In a real application, you would send the form data to a server here
+                    console.log('Form submitted:', { name, email });
+                }
+            });
+            
+            // Update active nav link based on scroll position
+            function updateActiveNavLink() {
+                const scrollPosition = window.scrollY + 100;
+                
+                // Get all sections
+                const homeSection = document.getElementById('home');
+                const aboutSection = document.getElementById('about');
+                const coursesSection = document.getElementById('courses');
+                const facultySection = document.getElementById('faculty');
+                const contactSection = document.getElementById('contact');
+                
+                // Get section positions
+                const homePosition = homeSection.offsetTop;
+                const aboutPosition = aboutSection.offsetTop;
+                const coursesPosition = coursesSection.offsetTop;
+                const facultyPosition = facultySection.offsetTop;
+                const contactPosition = contactSection.offsetTop;
+                
+                // Remove active class from all nav links
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Determine which section is in view and add active class to corresponding nav link
+                if (scrollPosition >= contactPosition) {
+                    document.querySelector('a[href="#contact"]').classList.add('active');
+                } else if (scrollPosition >= facultyPosition) {
+                    document.querySelector('a[href="#faculty"]').classList.add('active');
+                } else if (scrollPosition >= coursesPosition) {
+                    document.querySelector('a[href="#courses"]').classList.add('active');
+                } else if (scrollPosition >= aboutPosition) {
+                    document.querySelector('a[href="#about"]').classList.add('active');
+                } else {
+                    document.querySelector('a[href="#home"]').classList.add('active');
+                }
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Initialize active nav link on page load
+            updateActiveNavLink();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEVA - North East Vision Academy | Turning Vision Into Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #0a1a3a;
+            --secondary-color: #d4af37;
+            --accent-color: #4a1e8a;
+            --light-color: #f8f9fa;
+            --gray-light: #e9ecef;
+            --gray-medium: #6c757d;
+            --text-color: #333;
+            --text-light: #fff;
+            --gradient-primary: linear-gradient(135deg, #0a1a3a 0%, #4a1e8a 100%);
+            --gradient-cta: linear-gradient(90deg, #0a1a3a 0%, #4a1e8a 100%);
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.12);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-gold);
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background-color: var(--gray-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient-cta);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .btn-gold {
+            background: var(--gradient-gold);
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-gold {
+            color: var(--secondary-color);
+        }
+
+        .text-gradient {
+            background: var(--gradient-cta);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .logo-subtext {
+            font-size: 0.7rem;
+            color: var(--secondary-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-1 {
+            width: 200px;
+            height: 120px;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .floating-2 {
+            width: 180px;
+            height: 180px;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .floating-3 {
+            width: 160px;
+            height: 160px;
+            top: 50%;
+            right: 20%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .floating-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .floating-text {
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            height: 400px;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        .about-image:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(212,175,55,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-cta);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-text {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+        }
+
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .course-icon {
+            height: 80px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 2rem;
+        }
+
+        .course-content {
+            padding: 25px;
+        }
+
+        .course-content h3 {
+            margin-bottom: 15px;
+        }
+
+        .course-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .course-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .course-features i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Faculty Section */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .faculty-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .faculty-img {
+            height: 250px;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faculty-img:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(212,175,55,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .faculty-info {
+            padding: 25px;
+        }
+
+        .faculty-subject {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .faculty-exp {
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .faculty-quote {
+            font-style: italic;
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 15px;
+        }
+
+        /* Why Choose Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        /* Testimonials */
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            background: var(--light-color);
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .student-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 2rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .student-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .student-course {
+            color: var(--gray-medium);
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .slider-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--gray-light);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-btn.active {
+            background: var(--gradient-gold);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            color: var(--text-light);
+        }
+
+        .cta-section h2:after {
+            background: var(--gradient-gold);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: var(--light-color);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(10, 26, 58, 0.1);
+        }
+
+        .map-placeholder {
+            height: 200px;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo-text {
+            color: var(--text-light);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-gold);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-container, .about-content, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-visual {
+                height: 300px;
+                order: -1;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-buttons, .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .courses-grid, .faculty-grid, .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">N</div>
+                <div>
+                    <div class="logo-text">NEVA</div>
+                    <div class="logo-subtext">North East Vision Academy</div>
+                </div>
+            </div>
+            <nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#courses">Courses</a>
+                    <a href="#faculty">Faculty</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#contact" class="btn btn-gold">Enroll Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Shaping the Future of North East's Brightest Minds</h1>
+                <p class="hero-subtitle">NEVA - Turning vision into results with disciplined mentorship, personalized guidance, and a proven track record of academic excellence.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Enroll Now</a>
+                    <a href="#download" class="btn btn-secondary">Download Prospectus</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-element floating-1">
+                    <div class="floating-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="floating-text">90% Success Rate</div>
+                </div>
+                <div class="floating-element floating-2">
+                    <div class="floating-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="floating-text">Expert Faculty</div>
+                </div>
+                <div class="floating-element floating-3">
+                    <div class="floating-icon"><i class="fas fa-award"></i></div>
+                    <div class="floating-text">Proven Results</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About NEVA</h2>
+            <div class="about-content">
+                <div>
+                    <h3>Turning Vision Into <span class="text-gradient">Results</span></h3>
+                    <p>North East Vision Academy (NEVA) is a premier coaching institute dedicated to nurturing the academic potential of students across the North East region. With a strong focus on discipline, mentorship, and personalized guidance, we provide a transformative learning experience.</p>
+                    <p>Our mission is to empower students with knowledge, critical thinking skills, and the confidence to excel in their academic pursuits and competitive examinations.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="500">0</div>
+                            <div class="stat-text">Students Mentored</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="95">0</div>
+                            <div class="stat-text">Success Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="25">0</div>
+                            <div class="stat-text">Expert Faculty</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section-alt">
+        <div class="container">
+            <h2>Our <span class="text-gradient">Courses</span></h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Class 9 & 10 Foundation</h3>
+                        <p>Build a strong academic foundation with comprehensive coverage of syllabus, concept clarity, and regular assessments.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Complete syllabus coverage</li>
+                            <li><i class="fas fa-check-circle"></i> Regular tests & assessments</li>
+                            <li><i class="fas fa-check-circle"></i> Doubt clearing sessions</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Class 11 & 12 (Science)</h3>
+                        <p>Specialized coaching for Science stream with focus on Physics, Chemistry, Mathematics, and Biology.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Advanced concept teaching</li>
+                            <li><i class="fas fa-check-circle"></i> Practical lab sessions</li>
+                            <li><i class="fas fa-check-circle"></i> Board exam preparation</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Class 11 & 12 (Commerce)</h3>
+                        <p>Comprehensive coaching for Commerce stream covering Accountancy, Business Studies, and Economics.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Accountancy mastery</li>
+                            <li><i class="fas fa-check-circle"></i> Business studies focus</li>
+                            <li><i class="fas fa-check-circle"></i> Economics concepts</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>Competitive Exam Prep</h3>
+                        <p>Specialized training for engineering, medical, and other competitive entrance examinations.</p>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Mock test series</li>
+                            <li><i class="fas fa-check-circle"></i> Time management strategies</li>
+                            <li><i class="fas fa-check-circle"></i> Previous year papers</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section id="faculty">
+        <div class="container">
+            <h2>Our <span class="text-gradient">Expert Faculty</span></h2>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <div class="faculty-img"></div>
+                    <div class="faculty-info">
+                        <h3>Dr. Amit Sharma</h3>
+                        <div class="faculty-subject">Physics</div>
+                        <div class="faculty-exp">15+ years experience</div>
+                        <p>Specializes in conceptual physics and problem-solving techniques for competitive exams.</p>
+                        <div class="faculty-quote">"Physics is not just a subject, it's a way to understand the universe."</div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img"></div>
+                    <div class="faculty-info">
+                        <h3>Prof. Priya Singh</h3>
+                        <div class="faculty-subject">Chemistry</div>
+                        <div class="faculty-exp">12+ years experience</div>
+                        <p>Expert in organic and inorganic chemistry with focus on NEET and JEE preparation.</p>
+                        <div class="faculty-quote">"Chemistry is the bridge between physics and biology."</div>
+                    </div>
+                </div>
+                <div class="faculty-card">
+                    <div class="faculty-img"></div>
+                    <div class="faculty-info">
+                        <h3>Dr. Rajesh Mehta</h3>
+                        <div class="faculty-subject">Mathematics</div>
+                        <div class="faculty-exp">18+ years experience</div>
+                        <p>Specializes in advanced mathematics and problem-solving techniques for engineering entrance.</p>
+                        <div class="faculty-quote">"Mathematics is the language in which the universe is written."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose NEVA -->
+    <section class="section-alt">
+        <div class="container">
+            <h2>Why <span class="text-gradient">Choose NEVA</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Experienced Mentors</h3>
+                    <p>Learn from highly qualified faculty with proven track records of producing top rankers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Small Batch Sizes</h3>
+                    <p>Limited students per batch to ensure personalized attention and better learning outcomes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Performance Tracking</h3>
+                    <p>Regular tests and detailed performance analysis to identify strengths and improvement areas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Doubt-Clearing Sessions</h3>
+                    <p>Dedicated sessions to address individual doubts and ensure complete concept clarity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Personalized Guidance</h3>
+                    <p>One-on-one mentorship and career counseling to help students achieve their academic goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Study Material</h3>
+                    <p>Comprehensive, updated study material designed by experts for effective learning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <h2>Student <span class="text-gradient">Testimonials</span></h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-slide">
+                        <div class="student-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="testimonial-text">"NEVA transformed my approach to studies. The faculty's dedication and personalized guidance helped me secure 95% in my Class 12 boards and get into my dream engineering college."</p>
+                        <div class="student-name">Rohit Das</div>
+                        <div class="student-course">Class 12 Science, JEE Aspirant</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="student-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="testimonial-text">"The small batch sizes and regular tests at NEVA made a huge difference. My concepts became clearer, and I improved my NEET score by 150 marks in just 6 months."</p>
+                        <div class="student-name">Priya Bora</div>
+                        <div class="student-course">NEET Aspirant</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="student-img">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="testimonial-text">"As a commerce student, I was struggling with Accountancy. NEVA's teaching methodology and doubt-clearing sessions helped me master the subject and score 98 in my boards."</p>
+                        <div class="student-name">Arjun Baruah</div>
+                        <div class="student-course">Class 12 Commerce</div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn active" data-slide="0"></button>
+                    <button class="slider-btn" data-slide="1"></button>
+                    <button class="slider-btn" data-slide="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Your Success Journey Starts Here</h2>
+            <p>Join hundreds of successful students who turned their vision into results with NEVA's proven methodology and expert guidance.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-gold">Enroll Now</a>
+                <a href="#contact" class="btn btn-secondary">Book Free Counseling</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-alt">
+        <div class="container">
+            <h2>Contact <span class="text-gradient">NEVA</span></h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Reach out to us for any queries about courses, admission process, or to book a free counseling session.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Academic Road, Guwahati, Assam 781001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@nevaacademy.com</p>
+                        </div>
+                    </div>
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i> &nbsp; Google Maps Location
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="inquiryForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" required>
+                                <option value="" disabled selected>Select Course Interest</option>
+                                <option>Class 9 & 10 Foundation</option>
+                                <option>Class 11 & 12 Science</option>
+                                <option>Class 11 & 12 Commerce</option>
+                                <option>Competitive Exam Prep</option>
+                                <option>Crash Courses</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <div class="logo-icon">N</div>
+                            <div>
+                                <div class="logo-text">NEVA</div>
+                                <div class="logo-subtext">North East Vision Academy</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Turning vision into results through disciplined mentorship, personalized guidance, and academic excellence.</p>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#faculty">Faculty</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-courses">
+                    <h4 class="footer-heading">Our Courses</h4>
+                    <ul class="footer-links">
+                        <li><a href="#courses">Class 9 & 10 Foundation</a></li>
+                        <li><a href="#courses">Class 11 & 12 Science</a></li>
+                        <li><a href="#courses">Class 11 & 12 Commerce</a></li>
+                        <li><a href="#courses">Competitive Exam Prep</a></li>
+                        <li><a href="#courses">Crash Courses</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Academic Road, Guwahati</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@nevaacademy.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 NEVA - North East Vision Academy. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Testimonial Slider
+        const testimonialTrack = document.getElementById('testimonialTrack');
+        const sliderButtons = document.querySelectorAll('.slider-btn');
+        let currentSlide = 0;
+
+        function updateSlider() {
+            testimonialTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active button
+            sliderButtons.forEach((btn, index) => {
+                if (index === currentSlide) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        sliderButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentSlide = parseInt(btn.getAttribute('data-slide'));
+                updateSlider();
+            });
+        });
+
+        // Auto slide testimonials
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % 3;
+            updateSlider();
+        }, 5000);
+
+        // Animated counter for stats
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounter, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from('.hero-content h1', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero-content p', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.hero-buttons', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+
+        // Floating elements animation
+        gsap.to('.floating-1', {
+            y: 10,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1.inOut'
+        });
+
+        gsap.to('.floating-2', {
+            y: -15,
+            duration: 2.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1.inOut',
+            delay: 0.5
+        });
+
+        gsap.to('.floating-3', {
+            y: 20,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1.inOut',
+            delay: 1
+        });
+
+        // Section reveal animations
+        const sections = document.querySelectorAll('section:not(.hero)');
+        
+        sections.forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Card hover animations
+        const cards = document.querySelectorAll('.course-card, .faculty-card, .feature-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.03,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you shortly.');
+            this.reset();
+        });
+
+        // Initialize counter animation when about section is in view
+        ScrollTrigger.create({
+            trigger: "#about",
+            start: "top 70%",
+            onEnter: () => {
+                animateCounter();
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
