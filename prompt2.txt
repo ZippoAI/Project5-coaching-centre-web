@@ -1,0 +1,52 @@
+Act as a senior UI/UX designer and front-end engineer. Build a high-end, premium coaching centre website that feels modern, trustworthy, and aspirational.
+
+Delivery Constraint (critical)
+• Send all code in a single HTML file
+• Inline CSS and JavaScript inside the same file
+• No external frameworks or build tools
+
+Tech Stack (mandatory)
+HTML5 for structure
+CSS3 (Flexbox + Grid) for layout
+Vanilla JavaScript for interactions
+GSAP for smooth, high-impact animations
+
+Design & Experience Goals
+• Ultra-premium, professional look
+• Strong brand presence with refined visual hierarchy
+• Elegant dark-based color theme with tasteful accent colors
+• Clean typography, strong spacing, polished UI components
+• Must feel human-designed — not AI-generated
+
+Layout Requirement
+Single-page website that visually and logically behaves like a 5-page experience, using smooth scrolling and section-based navigation:
+
+Home / Hero
+
+About the Coaching Centre
+
+Courses / Programs
+
+Faculty / Mentors (use realistic placeholder profiles)
+
+Contact / Enquiry
+
+Core Components
+• Sticky modern navbar with active-section indicator
+• Premium footer with contact info, quick links, and branding
+• Strategic CTA buttons
+• Mobile-first and fully responsive across all screen sizes
+
+Animations (GSAP)
+• Hero animations on load
+• Scroll-triggered section reveals
+• Subtle hover and micro-interactions
+• Smooth, elegant transitions (no over-animation)
+
+Code Quality
+• Clean, readable, production-ready code
+• Well-structured semantic HTML
+• Reusable, scalable CSS
+• Lightweight, performant JavaScript
+
+Deliver a website that looks like it was built by a premium digital agency for a top-tier coaching institute — refined, confident, and conversion-focused.
